@@ -1,10 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 
-function Search() {
+function Search({gregsSearch}) {
+  const [filterForm] = useState("")
+  
+  function filter(e) {
+		gregsFilter(e.target.value)
+	}
+  
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+    console.log(e)
+    return{[e.target.description]: e.target.value}
+    
   }
+    let gregsFilter = gregsSearch.filter(el => { 
+      return(el.name.toLowerCase().includes(filterForm.toLowerCase()))
+    })
 
   return (
     <form className="searchbar" onSubmit={handleSubmit}>
@@ -13,11 +24,12 @@ function Search() {
         id="search"
         placeholder="search free stuff"
         value={""}
-        onChange={(e) => console.log(e.target.value)}
+       
       />
-      <button type="submit">🔍</button>
+      <button onClick={filter} type="submit">🔍</button>
     </form>
   );
 }
 
 export default Search;
+ 

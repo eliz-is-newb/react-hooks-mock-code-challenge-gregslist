@@ -1,20 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 
-function ListingCard() {
+function ListingCard({gregs}) {
+  
+  const [favButt, setFavButt] = useState(true)
+  function toggleFav() {
+    setFavButt(isFav => !isFav)
+  }
   return (
     <li className="card">
       <div className="image">
         <span className="price">$0</span>
-        <img src={"https://via.placeholder.com/300x300"} alt={"description"} />
+        <img src={gregs.image} alt={gregs.description} />
       </div>
       <div className="details">
-        {true ? (
-          <button className="emoji-button favorite active">★</button>
-        ) : (
-          <button className="emoji-button favorite">☆</button>
-        )}
-        <strong>{"description"}</strong>
-        <span> · {"location"}</span>
+        <button className="emoji-button favorite"> onClick={toggleFav}
+        {favButt 
+        ? "★"
+        : "☆"
+        } 
+        </button>
+        <strong>{gregs.description}</strong>
+        <span>{` · ${gregs.location}`}</span>
+
         <button className="emoji-button delete">🗑</button>
       </div>
     </li>
@@ -22,3 +29,4 @@ function ListingCard() {
 }
 
 export default ListingCard;
+ 
